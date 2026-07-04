@@ -1,9 +1,10 @@
 # PT Ken Mandiri Teknik — Sistem Inventory & Penjualan (Laravel 12)
 
-@GerhaanSyachh - Gerhaan
-@irpanstmi - Irfan Sentosa 1324090
-@tristananth - Tristan Anthony 
-@OurangIlang - Rasya Khairi Najib 1324091
+
+- @GerhaanSyachh - Gerhaan
+- @irpanstmi - Irfan Sentosa 1324090
+- @tristananth - Tristan Anthony 
+- @OurangIlang - Rasya Khairi Najib 1324091
 
 Aplikasi manajemen pembelian (nota pembelian) dan penjualan (invoice) untuk
 PT Ken Mandiri Teknik. Ini adalah hasil migrasi **1:1** dari aplikasi PHP-native
