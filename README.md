@@ -8,12 +8,14 @@ Controller, foreign-key constraints, proteksi CSRF, dan autentikasi.
 
 Tampilan (UI/UX), alur kerja, nama tabel/kolom, dan relasi dipertahankan persis
 seperti aplikasi asli.
-
+@irpanstmi
+@kokoh
+@rasya
 ---
 
 ## Persyaratan
 
-- PHP >= 8.3
+- PHP >= 8.2
 - Composer 2
 - MySQL >= 8 atau MariaDB >= 10.4
 - Ekstensi PHP standar Laravel (OpenSSL, PDO, Mbstring, Tokenizer, XML, Ctype, JSON, BCMath, Fileinfo)
