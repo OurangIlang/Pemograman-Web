@@ -59,7 +59,7 @@
 
       <div class="form-element">
         <label>Total Price</label>
-        <input type="number" step="0.01" name="total_price" id="total_price" class="form-control" value="{{ old('total_price', '0') }}" placeholder="Bisa include diskon/pajak">
+        <input type="number" step="0.01" name="total_price" id="total_price" class="form-control" value="{{ old('total_price', '0') }}" readonly>
       </div>
 
       <div class="form-actions">

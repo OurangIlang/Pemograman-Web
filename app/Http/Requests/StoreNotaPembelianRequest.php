@@ -11,6 +11,21 @@ class StoreNotaPembelianRequest extends FormRequest
         return true;
     }
 
+    /**
+     * For non-admin (pegawai) users, the employee performing the
+     * transaction is always the currently authenticated user — it is
+     * never taken from client input. This guarantees the value cannot
+     * be tampered with and matches the "auto-fill pegawai" requirement.
+     */
+    protected function prepareForValidation(): void
+    {
+        $user = $this->user();
+
+        if ($user && ! $user->isAdmin() && $user->id_pegawai) {
+            $this->merge(['id_pegawai' => $user->id_pegawai]);
+        }
+    }
+
     public function rules(): array
     {
         return [

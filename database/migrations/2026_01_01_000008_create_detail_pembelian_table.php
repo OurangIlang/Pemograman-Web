@@ -38,7 +38,7 @@ return new class extends Migration
 
             $table->foreign('id_bahan_baku', 'fk_detail_bahan')
                 ->references('id_bahan_baku')->on('bahan_baku')
-                ->onUpdate('cascade');
+                ->onUpdate('cascade')->onDelete('restrict');
         });
     }
 

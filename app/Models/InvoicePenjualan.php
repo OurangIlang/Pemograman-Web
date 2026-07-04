@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Traits\AutoAudit;
+use App\Traits\LogsActivity;
+use App\Traits\SoftDeletesAudited;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,10 +13,16 @@ use Illuminate\Database\Eloquent\Model;
  *
  * Mirrors the original `invoice_penjualan` table. Primary key is the
  * human-entered `no_invoice` string.
+ *
+ * `created_by` / `updated_by` / `deleted_by` + timestamps were added on
+ * top of the original schema to support the "Riwayat Transaksi"
+ * (transaction history) log feature and the full audit trail. Both are
+ * stamped automatically (see App\Traits\AutoAudit) — never trusted from
+ * request input.
  */
 class InvoicePenjualan extends Model
 {
-    use HasFactory;
+    use HasFactory, LogsActivity, SoftDeletesAudited, AutoAudit;
 
     protected $table = 'invoice_penjualan';
 
@@ -23,8 +32,6 @@ class InvoicePenjualan extends Model
 
     public $incrementing = false;
 
-    public $timestamps = false;
-
     protected $fillable = [
         'no_invoice',
         'no_faktur',
@@ -32,6 +39,8 @@ class InvoicePenjualan extends Model
         'id_pegawai',
         'id_customer',
         'tanggal',
+        'created_by',
+        'updated_by',
     ];
 
     protected $casts = [
@@ -46,6 +55,31 @@ class InvoicePenjualan extends Model
     public function customer()
     {
         return $this->belongsTo(Customer::class, 'id_customer', 'id_customer');
+    }
+
+    /**
+     * The logged-in user (admin or pegawai account) who recorded this
+     * transaction — used by the "Riwayat Transaksi" history page.
+     */
+    public function createdBy()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    /**
+     * The logged-in user who last modified this transaction.
+     */
+    public function updatedBy()
+    {
+        return $this->belongsTo(User::class, 'updated_by');
+    }
+
+    /**
+     * The logged-in user who (soft) deleted this transaction.
+     */
+    public function deletedBy()
+    {
+        return $this->belongsTo(User::class, 'deleted_by');
     }
 
     /**
@@ -72,10 +106,23 @@ class InvoicePenjualan extends Model
     }
 
     /**
-     * Sum of line-item total_price (the invoice sub total).
+     * Sum of line items, computed dynamically from the CURRENT barang
+     * price (qty x harga_barang terkini) — never from the price stored
+     * at the time the item was recorded. This is what makes a
+     * master-data price change instantly reflect on every past and
+     * present invoice, report, and history page.
      */
     public function getSubTotalAttribute(): float
     {
-        return (float) $this->details->sum('total_price');
+        return (float) $this->details->sum(fn (DetailInvoicePenjualan $d) => $d->sub_total_terkini);
+    }
+
+    /**
+     * Number of distinct line items on this invoice (for "Jumlah Item"
+     * on the Riwayat Transaksi page).
+     */
+    public function getJumlahItemAttribute(): int
+    {
+        return $this->details->count();
     }
 }

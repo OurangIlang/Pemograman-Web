@@ -46,12 +46,12 @@
 
       <div class="form-element">
         <label>Unit Price</label>
-        <input type="number" step="0.01" name="unit_price" id="unit_price" class="form-control" value="{{ old('unit_price', $detail->unit_price) }}" readonly>
+        <input type="number" step="0.01" name="unit_price" id="unit_price" class="form-control" value="{{ old('unit_price', $detail->unit_price_terkini) }}" readonly>
       </div>
 
       <div class="form-element">
         <label>Sub Total</label>
-        <input type="text" id="sub_display" class="form-control" readonly value="Rp {{ number_format($detail->sub_total, 2, ',', '.') }}">
+        <input type="text" id="sub_display" class="form-control" readonly value="Rp {{ number_format($detail->sub_total_terkini, 2, ',', '.') }}">
       </div>
 
       <div class="form-actions">

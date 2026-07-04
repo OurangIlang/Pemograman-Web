@@ -53,9 +53,30 @@ class PegawaiController extends Controller
             ->with('success', 'Data pegawai berhasil diperbarui.');
     }
 
+    /**
+     * Delete an employee (was pegawai-hapus.php).
+     *
+     * Employees already tied to a purchase note or sales invoice must
+     * not be removed — enforced first here for a friendly message, and
+     * backed by an ON DELETE RESTRICT foreign key at the database level.
+     */
     public function destroy(string $id): RedirectResponse
     {
-        Pegawai::where('id_pegawai', $id)->delete();
+        $item = Pegawai::findOrFail($id);
+
+        if ($item->notaPembelian()->exists() || $item->invoice()->exists()) {
+            return redirect()
+                ->route('pegawai.index')
+                ->with('error', 'Data tidak dapat dihapus karena sudah digunakan pada transaksi.');
+        }
+
+        try {
+            $item->delete();
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()
+                ->route('pegawai.index')
+                ->with('error', 'Data tidak dapat dihapus karena sudah digunakan pada transaksi.');
+        }
 
         return redirect()
             ->route('pegawai.index')

@@ -60,9 +60,30 @@ class PerusahaanController extends Controller
             ->with('success', 'Data perusahaan berhasil diperbarui.');
     }
 
+    /**
+     * Delete a supplier company (was perusahaan-hapus.php).
+     *
+     * Suppliers already referenced by a purchase note must not be
+     * removed — enforced first here for a friendly message, and backed
+     * by an ON DELETE RESTRICT foreign key at the database level.
+     */
     public function destroy(string $id): RedirectResponse
     {
-        Perusahaan::where('id_perusahaan', $id)->delete();
+        $item = Perusahaan::findOrFail($id);
+
+        if ($item->notaPembelian()->exists()) {
+            return redirect()
+                ->route('perusahaan.index')
+                ->with('error', 'Data tidak dapat dihapus karena sudah digunakan pada transaksi.');
+        }
+
+        try {
+            $item->delete();
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()
+                ->route('perusahaan.index')
+                ->with('error', 'Data tidak dapat dihapus karena sudah digunakan pada transaksi.');
+        }
 
         return redirect()
             ->route('perusahaan.index')

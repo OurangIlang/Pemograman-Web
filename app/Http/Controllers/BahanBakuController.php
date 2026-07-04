@@ -70,10 +70,29 @@ class BahanBakuController extends Controller
 
     /**
      * Delete a raw material (was bahan_baku-hapus.php).
+     *
+     * Raw materials already referenced by a purchase-note line item
+     * (detail_pembelian) must not be removed — the database also
+     * enforces this via an ON DELETE RESTRICT foreign key, but we check
+     * first so the user gets a friendly message instead of a 500 error.
      */
     public function destroy(string $id): RedirectResponse
     {
-        BahanBaku::where('id_bahan_baku', $id)->delete();
+        $item = BahanBaku::findOrFail($id);
+
+        if ($item->detailPembelian()->exists()) {
+            return redirect()
+                ->route('bahan_baku.index')
+                ->with('error', 'Data tidak dapat dihapus karena sudah digunakan pada transaksi.');
+        }
+
+        try {
+            $item->delete();
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()
+                ->route('bahan_baku.index')
+                ->with('error', 'Data tidak dapat dihapus karena sudah digunakan pada transaksi.');
+        }
 
         return redirect()
             ->route('bahan_baku.index')

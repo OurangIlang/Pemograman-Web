@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Traits\LogsActivity;
+use App\Traits\SoftDeletesAudited;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,10 +11,14 @@ use Illuminate\Database\Eloquent\Model;
  * Pegawai (employee) master data.
  *
  * Mirrors the original `pegawai` table.
+ *
+ * Soft-deleted (never actually removed) so historical transactions
+ * recorded by an employee still resolve their name even after the
+ * employee record is "deleted".
  */
 class Pegawai extends Model
 {
-    use HasFactory;
+    use HasFactory, LogsActivity, SoftDeletesAudited;
 
     protected $table = 'pegawai';
 

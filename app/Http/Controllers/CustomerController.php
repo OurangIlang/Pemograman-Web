@@ -53,9 +53,30 @@ class CustomerController extends Controller
             ->with('success', 'Data customer berhasil diperbarui.');
     }
 
+    /**
+     * Delete a customer (was customer-hapus.php).
+     *
+     * Customers already referenced by a sales invoice must not be
+     * removed — enforced first here for a friendly message, and backed
+     * by an ON DELETE RESTRICT foreign key at the database level.
+     */
     public function destroy(string $id): RedirectResponse
     {
-        Customer::where('id_customer', $id)->delete();
+        $item = Customer::findOrFail($id);
+
+        if ($item->invoice()->exists()) {
+            return redirect()
+                ->route('customer.index')
+                ->with('error', 'Data tidak dapat dihapus karena sudah digunakan pada transaksi.');
+        }
+
+        try {
+            $item->delete();
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()
+                ->route('customer.index')
+                ->with('error', 'Data tidak dapat dihapus karena sudah digunakan pada transaksi.');
+        }
 
         return redirect()
             ->route('customer.index')

@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Traits\LogsActivity;
+use App\Traits\SoftDeletesAudited;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,10 +11,13 @@ use Illuminate\Database\Eloquent\Model;
  * Customer master data.
  *
  * Mirrors the original `customer` table.
+ *
+ * Soft-deleted (never actually removed) so historical sales invoices
+ * keep referencing a valid customer record even after it's "deleted".
  */
 class Customer extends Model
 {
-    use HasFactory;
+    use HasFactory, LogsActivity, SoftDeletesAudited;
 
     protected $table = 'customer';
 

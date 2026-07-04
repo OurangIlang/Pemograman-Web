@@ -26,11 +26,11 @@ return new class extends Migration
 
             $table->foreign('id_perusahaan', 'fk_nota_perusahaan')
                 ->references('id_perusahaan')->on('perusahaan')
-                ->onUpdate('cascade');
+                ->onUpdate('cascade')->onDelete('restrict');
 
             $table->foreign('id_pegawai', 'fk_nota_pegawai')
                 ->references('id_pegawai')->on('pegawai')
-                ->onUpdate('cascade');
+                ->onUpdate('cascade')->onDelete('restrict');
         });
     }
 

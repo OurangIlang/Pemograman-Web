@@ -27,11 +27,11 @@ return new class extends Migration
 
             $table->foreign('id_pegawai', 'fk_invoice_pegawai')
                 ->references('id_pegawai')->on('pegawai')
-                ->onUpdate('cascade');
+                ->onUpdate('cascade')->onDelete('restrict');
 
             $table->foreign('id_customer', 'fk_invoice_customer')
                 ->references('id_customer')->on('customer')
-                ->onUpdate('cascade');
+                ->onUpdate('cascade')->onDelete('restrict');
         });
     }
 

@@ -46,8 +46,42 @@ class DetailInvoicePenjualan extends Model
         return $this->belongsTo(InvoicePenjualan::class, 'no_invoice', 'no_invoice');
     }
 
+    /**
+     * The product master row. Reads through soft-deleted rows too
+     * (withTrashed) so that a "deleted" product never breaks the
+     * display of an old invoice that still references it.
+     */
     public function barang()
     {
-        return $this->belongsTo(Barang::class, 'id_barang', 'id_barang');
+        return $this->belongsTo(Barang::class, 'id_barang', 'id_barang')->withTrashed();
+    }
+
+    /**
+     * The product's CURRENT unit price, read live from the barang
+     * master row rather than the (legacy) `unit_price` value stored on
+     * this line item. Falls back to the originally recorded price only
+     * if the master row is somehow missing entirely.
+     */
+    public function getUnitPriceTerkiniAttribute(): float
+    {
+        return (float) ($this->barang->harga_barang ?? $this->unit_price);
+    }
+
+    /**
+     * The product's CURRENT name, read live from the master row.
+     */
+    public function getNamaBarangTerkiniAttribute(): string
+    {
+        return $this->barang->nama_barang ?? $this->id_barang;
+    }
+
+    /**
+     * qty x current master price — always up to date with the latest
+     * barang price, per the "master data changes must automatically
+     * flow through to every transaction" requirement.
+     */
+    public function getSubTotalTerkiniAttribute(): float
+    {
+        return (float) $this->qty * $this->unit_price_terkini;
     }
 }

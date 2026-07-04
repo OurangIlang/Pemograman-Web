@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Traits\LogsActivity;
+use App\Traits\SoftDeletesAudited;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,10 +12,15 @@ use Illuminate\Database\Eloquent\Model;
  *
  * Mirrors the original `bahan_baku` table: a string primary key
  * (`id_bahan_baku`) with no auto-increment and no timestamps.
+ *
+ * Soft-deleted (never actually removed from the database) so that
+ * historical transactions that reference a raw material can always
+ * still resolve its last known name/price — see the `bahanBaku()`
+ * relation on DetailPembelian, which reads through trashed rows too.
  */
 class BahanBaku extends Model
 {
-    use HasFactory;
+    use HasFactory, LogsActivity, SoftDeletesAudited;
 
     protected $table = 'bahan_baku';
 

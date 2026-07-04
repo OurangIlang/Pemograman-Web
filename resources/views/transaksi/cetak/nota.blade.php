@@ -117,12 +117,11 @@
     </thead>
     <tbody>
       @foreach ($nota->details as $item)
-        @php $tot_item = $item->qty * $item->harga_satuan; @endphp
       <tr>
         <td>{{ $item->keterangan }}</td>
         <td class="td-c">{{ number_format($item->qty, 0, ',', '.') }} Unit</td>
-        <td class="td-r">@@Rp &nbsp; {{ number_format($item->harga_satuan, 0, ',', '.') }}</td>
-        <td class="td-r">Rp &nbsp; {{ number_format($tot_item, 0, ',', '.') }}</td>
+        <td class="td-r">@@Rp &nbsp; {{ number_format($item->harga_satuan_terkini, 0, ',', '.') }}</td>
+        <td class="td-r">Rp &nbsp; {{ number_format($item->sub_total_terkini, 0, ',', '.') }}</td>
       </tr>
       @endforeach
       <tr class="total-row">

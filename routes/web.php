@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\LogAktivitasController;
+use App\Http\Controllers\Admin\RiwayatLoginController;
+use App\Http\Controllers\Admin\RiwayatTransaksiController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BahanBakuController;
 use App\Http\Controllers\BarangController;
@@ -78,5 +81,10 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('perusahaan', PerusahaanController::class)
             ->parameters(['perusahaan' => 'id_perusahaan'])
             ->except(['show']);
+
+        // Log Aktivitas, Riwayat Login & Riwayat Transaksi — admin only.
+        Route::get('log-aktivitas', [LogAktivitasController::class, 'index'])->name('log-aktivitas.index');
+        Route::get('riwayat-login', [RiwayatLoginController::class, 'index'])->name('riwayat-login.index');
+        Route::get('riwayat-transaksi', [RiwayatTransaksiController::class, 'index'])->name('riwayat-transaksi.index');
     });
 });

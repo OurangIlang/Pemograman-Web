@@ -47,7 +47,9 @@ class NotaPembelianController extends Controller
      */
     public function store(StoreNotaPembelianRequest $request): RedirectResponse
     {
-        NotaPembelian::create($request->validated());
+        NotaPembelian::create($request->validated() + [
+            'created_by' => $request->user()?->id,
+        ]);
 
         return redirect()
             ->route('nota.index')
@@ -82,12 +84,15 @@ class NotaPembelianController extends Controller
     /**
      * Delete a purchase note (was nota_pembelian-hapus.php).
      *
-     * The FK constraint on detail_pembelian uses ON DELETE CASCADE, so
-     * line items are removed automatically by the database.
+     * Loaded as a model instance (not a query-builder mass delete) so
+     * that Eloquent's model events fire: this is what stamps
+     * `deleted_by` (App\Traits\SoftDeletesAudited) and records the
+     * "Hapus" activity log entry (App\Traits\LogsActivity). The note is
+     * soft-deleted, never actually removed from the database.
      */
     public function destroy(string $kode_nota): RedirectResponse
     {
-        NotaPembelian::where('kode_nota', $kode_nota)->delete();
+        NotaPembelian::findOrFail($kode_nota)->delete();
 
         return redirect()
             ->route('nota.index')

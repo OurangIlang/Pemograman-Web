@@ -51,12 +51,12 @@
       <tbody>
         @forelse ($details as $d)
           <tr>
-            <td>{{ $d->barang->nama_barang ?? $d->id_barang }}</td>
+            <td>{{ $d->nama_barang_terkini }}</td>
             <td>{{ $d->deskripsi }}</td>
             <td style="text-align:center;">{{ $d->qty }}</td>
-            <td style="text-align:right;">Rp {{ number_format($d->unit_price, 2, ',', '.') }}</td>
-            <td style="text-align:right;">Rp {{ number_format($d->sub_total, 2, ',', '.') }}</td>
-            <td style="text-align:right;">Rp {{ number_format($d->total_price, 2, ',', '.') }}</td>
+            <td style="text-align:right;">Rp {{ number_format($d->unit_price_terkini, 2, ',', '.') }}</td>
+            <td style="text-align:right;">Rp {{ number_format($d->sub_total_terkini, 2, ',', '.') }}</td>
+            <td style="text-align:right;">Rp {{ number_format($d->sub_total_terkini, 2, ',', '.') }}</td>
             <td style="text-align:center;">
               <a class="btn-ubah" href="{{ route('invoice.detail.edit', [$invoice->no_invoice, $d->id_barang]) }}"><i class="fa-solid fa-pen-to-square"></i> Ubah</a>
               <form action="{{ route('invoice.detail.destroy', [$invoice->no_invoice, $d->id_barang]) }}" method="POST" class="btn-hapus-inline" onsubmit="return confirm('Yakin hapus?')">

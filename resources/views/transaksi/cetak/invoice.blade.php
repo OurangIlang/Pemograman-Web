@@ -126,8 +126,8 @@
         <td class="td-c">{{ $loop->iteration }}</td>
         <td class="td-l">{{ $item->deskripsi }}</td>
         <td class="td-c">{{ number_format($item->qty, 0, ',', '.') }} &nbsp; Lot</td>
-        <td class="td-r">{{ number_format($item->unit_price, 2, ',', '.') }}</td>
-        <td class="td-r">{{ number_format($item->total_price, 2, ',', '.') }}</td>
+        <td class="td-r">{{ number_format($item->unit_price_terkini, 2, ',', '.') }}</td>
+        <td class="td-r">{{ number_format($item->sub_total_terkini, 2, ',', '.') }}</td>
       </tr>
       @endforeach
       @for ($i = $invoice->details->count(); $i < 8; $i++)

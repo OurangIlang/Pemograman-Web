@@ -33,7 +33,9 @@ class DetailPembelianController extends Controller
             ->where('kode_nota', $kode_nota)
             ->get();
 
-        $grandTotal = $details->sum('total_harga');
+        // Dynamic grand total: qty x CURRENT bahan_baku price for every
+        // line item, so a master price change is reflected immediately.
+        $grandTotal = $details->sum(fn (DetailPembelian $d) => $d->sub_total_terkini);
 
         return view('transaksi.nota.detail.index', compact('nota', 'details', 'grandTotal'));
     }
@@ -54,20 +56,25 @@ class DetailPembelianController extends Controller
     /**
      * Persist a new line item (was detail_nota-tambah.php, POST).
      *
-     * Sub-total and total are recomputed server-side from qty * unit
-     * price to guarantee integrity regardless of the posted values.
+     * The unit price is ALWAYS taken from the current bahan_baku master
+     * price — never from client input — so a stale or tampered price
+     * can never be recorded. sub_total/total_harga are then derived
+     * from qty x that price. These columns remain on the table only as
+     * a point-in-time snapshot; every read in the app (detail list,
+     * cetak, riwayat transaksi, grand totals) uses the live
+     * `sub_total_terkini` accessor instead, which always reflects the
+     * bahan_baku's current price even if it changes later.
      */
     public function store(StoreDetailPembelianRequest $request): RedirectResponse
     {
         $data = $request->validated();
 
-        $subTotal = (float) $data['qty'] * (float) $data['harga_satuan'];
+        $hargaSatuan = (float) BahanBaku::findOrFail($data['id_bahan_baku'])->harga_bahan_baku;
+        $subTotal = (float) $data['qty'] * $hargaSatuan;
+
+        $data['harga_satuan'] = $hargaSatuan;
         $data['sub_total'] = $subTotal;
-        // The original form lets the user override total (for discount /
-        // tax). Fall back to the computed sub-total when not provided.
-        $data['total_harga'] = isset($data['total_harga']) && $data['total_harga'] !== null
-            ? (float) $data['total_harga']
-            : $subTotal;
+        $data['total_harga'] = $subTotal;
 
         DetailPembelian::create($data);
 
@@ -93,15 +100,16 @@ class DetailPembelianController extends Controller
     /**
      * Update one line item (was detail_nota-ubah.php, POST).
      *
-     * Mirrors the original: sub_total and total_harga are derived from
-     * qty * harga_satuan.
+     * The unit price is always re-read from the current bahan_baku
+     * master price (never trusted from client input); sub_total and
+     * total_harga are derived from qty * that price.
      */
     public function update(UpdateDetailPembelianRequest $request, string $kode_nota, string $id_bahan_baku): RedirectResponse
     {
         $data = $request->validated();
 
         $qty = (float) $data['qty'];
-        $hargaSatuan = (float) $data['harga_satuan'];
+        $hargaSatuan = (float) BahanBaku::findOrFail($id_bahan_baku)->harga_bahan_baku;
         $subTotal = $qty * $hargaSatuan;
 
         DetailPembelian::where('kode_nota', $kode_nota)

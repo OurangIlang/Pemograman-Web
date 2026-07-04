@@ -349,22 +349,13 @@
 
 <!-- RIGHT -->
 <div class="right">
-  <div class="role-tabs">
-    <button class="role-tab active" id="tab-admin" onclick="setRole('admin')">
-      <i class="fa-solid fa-user-shield"></i> Admin
-    </button>
-    <button class="role-tab" id="tab-pegawai" onclick="setRole('pegawai')">
-      <i class="fa-solid fa-id-badge"></i> Pegawai
-    </button>
-  </div>
-
   <div class="form-header">
     <div class="form-tag" id="role-tag">
       <i class="fa-solid fa-shield-halved"></i>
-      <span id="role-tag-text">Akses Admin</span>
+      <span id="role-tag-text">Akses Sistem</span>
     </div>
-    <h2 id="form-title">Login Administrator</h2>
-    <p id="form-sub">Masukkan kredensial admin untuk mengakses panel penuh</p>
+    <h2 id="form-title">Login Sistem PT Ken Mandiri Teknik</h2>
+    <p id="form-sub">Masukkan username dan password untuk masuk ke sistem</p>
   </div>
 
   @if ($errors->any())
@@ -415,7 +406,7 @@
 
     <button type="submit" class="btn-submit">
       <i class="fa-solid fa-right-to-bracket"></i>
-      <span id="btn-text">Masuk sebagai Admin</span>
+      <span id="btn-text">Masuk</span>
     </button>
   </form>
 
@@ -443,19 +434,6 @@ function togglePw() {
     pw.type = 'password';
     icon.className = 'fa-solid fa-eye';
   }
-}
-
-function setRole(role) {
-  const isAdmin = role === 'admin';
-  document.getElementById('tab-admin').className = 'role-tab' + (isAdmin ? ' active' : '');
-  document.getElementById('tab-pegawai').className = 'role-tab' + (!isAdmin ? ' active' : '');
-  document.getElementById('role-tag-text').textContent = isAdmin ? 'Akses Admin' : 'Akses Pegawai';
-  document.getElementById('form-title').textContent = isAdmin ? 'Login Administrator' : 'Login Pegawai';
-  document.getElementById('form-sub').textContent = isAdmin
-    ? 'Masukkan kredensial admin untuk mengakses panel penuh'
-    : 'Masukkan nama pegawai dan password untuk masuk';
-  document.getElementById('btn-text').textContent = isAdmin ? 'Masuk sebagai Admin' : 'Masuk sebagai Pegawai';
-  document.querySelector('.form-tag i').className = isAdmin ? 'fa-solid fa-shield-halved' : 'fa-solid fa-id-badge';
 }
 </script>
 </body>

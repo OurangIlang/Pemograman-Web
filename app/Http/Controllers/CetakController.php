@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ActivityLog;
+use App\Models\DetailInvoicePenjualan;
+use App\Models\DetailPembelian;
 use App\Models\InvoicePenjualan;
 use App\Models\NotaPembelian;
 use App\Support\Terbilang;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request as RequestFacade;
 use Illuminate\View\View;
 
 /**
@@ -23,8 +28,11 @@ class CetakController extends Controller
         $nota = NotaPembelian::with(['perusahaan', 'pegawai', 'details'])
             ->findOrFail($kode_nota);
 
-        // Original total: sum of qty * harga_satuan over the line items.
-        $total = $nota->details->sum(fn ($item) => (float) $item->qty * (float) $item->harga_satuan);
+        // Dynamic total: qty x CURRENT bahan_baku price, so the printed
+        // note always reflects the latest master price.
+        $total = $nota->details->sum(fn (DetailPembelian $item) => $item->sub_total_terkini);
+
+        $this->logCetak('nota_pembelian', $kode_nota);
 
         return view('transaksi.cetak.nota', compact('nota', 'total'));
     }
@@ -39,11 +47,39 @@ class CetakController extends Controller
         $invoice = InvoicePenjualan::with(['customer', 'pegawai', 'details'])
             ->findOrFail($no_invoice);
 
-        $subtotal = $invoice->details->sum('total_price');
+        // Dynamic subtotal: qty x CURRENT barang price, so the printed
+        // invoice always reflects the latest master price.
+        $subtotal = $invoice->details->sum(fn (DetailInvoicePenjualan $item) => $item->sub_total_terkini);
         $ppn = $subtotal * 0.11;
         $grand = $subtotal + $ppn;
         $terbilang = Terbilang::make($grand).' Rupiah';
 
+        $this->logCetak('invoice_penjualan', $no_invoice);
+
         return view('transaksi.cetak.invoice', compact('invoice', 'subtotal', 'ppn', 'grand', 'terbilang'));
+    }
+
+    /**
+     * Record a "Cetak" (print) entry in the activity log — the print
+     * pages don't touch an Eloquent model's create/update/delete
+     * lifecycle, so this isn't covered by App\Traits\LogsActivity and
+     * is logged explicitly here instead.
+     */
+    private function logCetak(string $tabel, string $recordId): void
+    {
+        $user = Auth::user();
+
+        ActivityLog::create([
+            'user_id' => $user->id ?? null,
+            'nama_user' => $user->name ?? 'System',
+            'role' => $user->role ?? '-',
+            'aktivitas' => 'Cetak',
+            'tabel' => $tabel,
+            'record_id' => $recordId,
+            'data_lama' => null,
+            'data_baru' => null,
+            'ip_address' => RequestFacade::ip(),
+            'user_agent' => RequestFacade::userAgent(),
+        ]);
     }
 }

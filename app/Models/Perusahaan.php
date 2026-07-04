@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Traits\LogsActivity;
+use App\Traits\SoftDeletesAudited;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,10 +11,13 @@ use Illuminate\Database\Eloquent\Model;
  * Perusahaan (supplier company) master data.
  *
  * Mirrors the original `perusahaan` table.
+ *
+ * Soft-deleted (never actually removed) so historical purchase notes
+ * still resolve the supplier's details even after it's "deleted".
  */
 class Perusahaan extends Model
 {
-    use HasFactory;
+    use HasFactory, LogsActivity, SoftDeletesAudited;
 
     protected $table = 'perusahaan';
 

@@ -12,6 +12,9 @@
         'barang'     => ['route' => 'barang.index',     'icon' => 'fa-solid fa-box',           'label' => 'Barang',           'section' => null],
         'nota'       => ['route' => 'nota.index',       'icon' => 'fa-solid fa-receipt',       'label' => 'Nota Pembelian',   'section' => 'Transaksi'],
         'invoice'    => ['route' => 'invoice.index',    'icon' => 'fa-solid fa-file-invoice',  'label' => 'Invoice Penjualan','section' => null],
+        'log-aktivitas'      => ['route' => 'log-aktivitas.index',      'icon' => 'fa-solid fa-clock-rotate-left', 'label' => 'Log Aktivitas',      'section' => 'Log & Riwayat'],
+        'riwayat-login'      => ['route' => 'riwayat-login.index',      'icon' => 'fa-solid fa-right-to-bracket',  'label' => 'Riwayat Login',       'section' => null],
+        'riwayat-transaksi'  => ['route' => 'riwayat-transaksi.index',  'icon' => 'fa-solid fa-clipboard-list',    'label' => 'Riwayat Transaksi',   'section' => null],
     ];
 
     $pegawaiMenu = [

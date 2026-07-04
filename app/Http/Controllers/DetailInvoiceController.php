@@ -32,7 +32,9 @@ class DetailInvoiceController extends Controller
             ->where('no_invoice', $no_invoice)
             ->get();
 
-        $grandTotal = $details->sum('total_price');
+        // Dynamic grand total: qty x CURRENT barang price for every
+        // line item, so a master price change is reflected immediately.
+        $grandTotal = $details->sum(fn (DetailInvoicePenjualan $d) => $d->sub_total_terkini);
 
         return view('transaksi.invoice.detail.index', compact('invoice', 'details', 'grandTotal'));
     }
@@ -52,18 +54,25 @@ class DetailInvoiceController extends Controller
     /**
      * Persist a new line item (was detail_invoice-tambah.php, POST).
      *
-     * sub_total and total_price are recomputed server-side from
-     * qty * unit_price.
+     * The unit price is ALWAYS taken from the current barang master
+     * price — never from client input — so a stale or tampered price
+     * can never be recorded. sub_total/total_price are then derived
+     * from qty x that price. These columns remain on the table only as
+     * a point-in-time snapshot; every read in the app (detail list,
+     * cetak, riwayat transaksi, grand totals) uses the live
+     * `sub_total_terkini` accessor instead, which always reflects the
+     * barang's current price even if it changes later.
      */
     public function store(StoreDetailInvoiceRequest $request): RedirectResponse
     {
         $data = $request->validated();
 
-        $subTotal = (float) $data['qty'] * (float) $data['unit_price'];
+        $unitPrice = (float) Barang::findOrFail($data['id_barang'])->harga_barang;
+        $subTotal = (float) $data['qty'] * $unitPrice;
+
+        $data['unit_price'] = $unitPrice;
         $data['sub_total'] = $subTotal;
-        $data['total_price'] = isset($data['total_price']) && $data['total_price'] !== null
-            ? (float) $data['total_price']
-            : $subTotal;
+        $data['total_price'] = $subTotal;
 
         DetailInvoicePenjualan::create($data);
 
@@ -88,13 +97,17 @@ class DetailInvoiceController extends Controller
 
     /**
      * Update one line item (was detail_invoice-ubah.php, POST).
+     *
+     * The unit price is always re-read from the current barang master
+     * price (never trusted from client input); sub_total and
+     * total_price are derived from qty * that price.
      */
     public function update(UpdateDetailInvoiceRequest $request, string $no_invoice, string $id_barang): RedirectResponse
     {
         $data = $request->validated();
 
         $qty = (float) $data['qty'];
-        $unitPrice = (float) $data['unit_price'];
+        $unitPrice = (float) Barang::findOrFail($id_barang)->harga_barang;
         $subTotal = $qty * $unitPrice;
 
         DetailInvoicePenjualan::where('no_invoice', $no_invoice)

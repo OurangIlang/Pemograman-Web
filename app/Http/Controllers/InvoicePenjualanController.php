@@ -44,7 +44,9 @@ class InvoicePenjualanController extends Controller
      */
     public function store(StoreInvoicePenjualanRequest $request): RedirectResponse
     {
-        InvoicePenjualan::create($request->validated());
+        InvoicePenjualan::create($request->validated() + [
+            'created_by' => $request->user()?->id,
+        ]);
 
         return redirect()
             ->route('invoice.index')
@@ -79,12 +81,15 @@ class InvoicePenjualanController extends Controller
     /**
      * Delete an invoice (was invoice_penjualan-hapus.php).
      *
-     * detail_invoice_penjualan has ON DELETE CASCADE, so its rows are
-     * removed automatically.
+     * Loaded as a model instance (not a query-builder mass delete) so
+     * that Eloquent's model events fire: this is what stamps
+     * `deleted_by` (App\Traits\SoftDeletesAudited) and records the
+     * "Hapus" activity log entry (App\Traits\LogsActivity). The invoice
+     * is soft-deleted, never actually removed from the database.
      */
     public function destroy(string $no_invoice): RedirectResponse
     {
-        InvoicePenjualan::where('no_invoice', $no_invoice)->delete();
+        InvoicePenjualan::findOrFail($no_invoice)->delete();
 
         return redirect()
             ->route('invoice.index')

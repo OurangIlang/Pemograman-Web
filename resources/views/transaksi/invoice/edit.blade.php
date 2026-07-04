@@ -46,12 +46,17 @@
       </div>
       <div class="form-element">
         <label>Pegawai</label>
-        <select name="id_pegawai" class="form-control @error('id_pegawai') is-invalid @enderror" required>
-          @foreach ($pegawai as $r)
-            <option value="{{ $r->id_pegawai }}" @selected(old('id_pegawai', $item->id_pegawai) === $r->id_pegawai)>{{ $r->nama_pegawai }}</option>
-          @endforeach
-        </select>
-        @error('id_pegawai') <span class="invalid-feedback">{{ $message }}</span> @enderror
+        @if (auth()->user()->isAdmin())
+          <select name="id_pegawai" class="form-control @error('id_pegawai') is-invalid @enderror" required>
+            @foreach ($pegawai as $r)
+              <option value="{{ $r->id_pegawai }}" @selected(old('id_pegawai', $item->id_pegawai) === $r->id_pegawai)>{{ $r->nama_pegawai }}</option>
+            @endforeach
+          </select>
+          @error('id_pegawai') <span class="invalid-feedback">{{ $message }}</span> @enderror
+        @else
+          <input type="text" class="form-control" value="{{ auth()->user()->pegawai->nama_pegawai ?? auth()->user()->name }}" readonly>
+          <input type="hidden" name="id_pegawai" value="{{ auth()->user()->id_pegawai }}">
+        @endif
       </div>
       <div class="form-actions">
         <a class="btn-secondary-form" href="{{ route('invoice.index') }}">Batal</a>

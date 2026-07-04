@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Traits\AutoAudit;
+use App\Traits\LogsActivity;
+use App\Traits\SoftDeletesAudited;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,10 +13,16 @@ use Illuminate\Database\Eloquent\Model;
  *
  * Mirrors the original `nota_pembelian` table. Primary key is the
  * human-entered `kode_nota` string.
+ *
+ * `created_by` / `updated_by` / `deleted_by` + timestamps were added on
+ * top of the original schema to support the "Riwayat Transaksi"
+ * (transaction history) log feature and the full audit trail. Both are
+ * stamped automatically (see App\Traits\AutoAudit) — never trusted from
+ * request input.
  */
 class NotaPembelian extends Model
 {
-    use HasFactory;
+    use HasFactory, LogsActivity, SoftDeletesAudited, AutoAudit;
 
     protected $table = 'nota_pembelian';
 
@@ -23,14 +32,14 @@ class NotaPembelian extends Model
 
     public $incrementing = false;
 
-    public $timestamps = false;
-
     protected $fillable = [
         'kode_nota',
         'id_perusahaan',
         'id_pegawai',
         'tanggal',
         'informasi',
+        'created_by',
+        'updated_by',
     ];
 
     protected $casts = [
@@ -45,6 +54,31 @@ class NotaPembelian extends Model
     public function pegawai()
     {
         return $this->belongsTo(Pegawai::class, 'id_pegawai', 'id_pegawai');
+    }
+
+    /**
+     * The logged-in user (admin or pegawai account) who recorded this
+     * transaction — used by the "Riwayat Transaksi" history page.
+     */
+    public function createdBy()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    /**
+     * The logged-in user who last modified this transaction.
+     */
+    public function updatedBy()
+    {
+        return $this->belongsTo(User::class, 'updated_by');
+    }
+
+    /**
+     * The logged-in user who (soft) deleted this transaction.
+     */
+    public function deletedBy()
+    {
+        return $this->belongsTo(User::class, 'deleted_by');
     }
 
     /**
@@ -71,10 +105,23 @@ class NotaPembelian extends Model
     }
 
     /**
-     * Grand total across all line items (sum of total_harga).
+     * Grand total across all line items, computed dynamically from the
+     * CURRENT bahan_baku price (qty x harga_bahan_baku terkini) — never
+     * from the price stored at the time the item was recorded. This is
+     * what makes a master-data price change instantly reflect on every
+     * past and present transaction, report, nota, and history page.
      */
     public function getGrandTotalAttribute(): float
     {
-        return (float) $this->details->sum('total_harga');
+        return (float) $this->details->sum(fn (DetailPembelian $d) => $d->sub_total_terkini);
+    }
+
+    /**
+     * Number of distinct line items on this note (for "Jumlah Item" on
+     * the Riwayat Transaksi page).
+     */
+    public function getJumlahItemAttribute(): int
+    {
+        return $this->details->count();
     }
 }
