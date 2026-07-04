@@ -8,7 +8,7 @@ Controller, foreign-key constraints, proteksi CSRF, dan autentikasi.
 
 Tampilan (UI/UX), alur kerja, nama tabel/kolom, dan relasi dipertahankan persis
 seperti aplikasi asli.
-
+@irpanstmi
 ---
 
 ## Persyaratan
