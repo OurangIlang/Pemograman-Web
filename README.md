@@ -12,10 +12,10 @@ seperti aplikasi asli.
 ---
 
 ## Anggota
-Rasya Khairi Najib -- 1324091
-Gerhan 
-Tristan Anthony -- 1324083
-Irfan Sentosa -- 1324090
+Rasya Khairi Najib -- 1324091 <br>
+Gerhan <br>
+Tristan Anthony -- 1324083 <br>
+Irfan Sentosa -- 1324090 <br>
 
 ---
 ## Persyaratan
