@@ -24,14 +24,12 @@ class CustomerController extends Controller
 
     public function create(): View
     {
-        $nextId = Customer::nextId();
-
-        return view('master.customer.create', compact('nextId'));
+        return view('master.customer.create');
     }
 
     public function store(StoreCustomerRequest $request): RedirectResponse
     {
-        Customer::createWithAutoId($request->validated());
+        Customer::create($request->validated());
 
         return redirect()
             ->route('customer.index')

@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Traits\GeneratesId;
 use App\Traits\LogsActivity;
 use App\Traits\SoftDeletesAudited;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -16,14 +15,10 @@ use Illuminate\Database\Eloquent\Model;
  * Soft-deleted (never actually removed) so historical transactions
  * recorded by an employee still resolve their name even after the
  * employee record is "deleted".
- *
- * The primary key is auto-generated (PEG001, PEG002, ...) via
- * App\Traits\GeneratesId — never entered manually. Use
- * Pegawai::createWithAutoId($data) instead of Pegawai::create().
  */
 class Pegawai extends Model
 {
-    use GeneratesId, HasFactory, LogsActivity, SoftDeletesAudited;
+    use HasFactory, LogsActivity, SoftDeletesAudited;
 
     protected $table = 'pegawai';
 
@@ -39,11 +34,6 @@ class Pegawai extends Model
         'id_pegawai',
         'nama_pegawai',
     ];
-
-    public static function idPrefix(): string
-    {
-        return 'PEG';
-    }
 
     /**
      * Purchase notes recorded by this employee.
