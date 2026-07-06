@@ -14,7 +14,7 @@ seperti aplikasi asli.
 ## Anggota
 Rasya Khairi Najib -- 1324091
 Gerhan 
-Tristan Anthony
+Tristan Anthony -- 1324083
 Irfan Sentosa -- 1324090
 
 ---
