@@ -9,6 +9,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css">
   <style>
     :root {
       --blue:    #2563EB;
@@ -529,6 +531,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   <script>
     $(document).ready(function () {
       if ($('#example').length) {
@@ -539,6 +542,22 @@
       $('#sidebarCollapse').on('click', function () {
         $('#sidebar').toggleClass('collapsed');
       });
+
+      // Turn every dropdown marked .js-select2 into a searchable
+      // select (Customer, Pegawai, Perusahaan, Barang, Bahan Baku
+      // pickers on transaction forms) without touching any other
+      // styling — it renders using the bootstrap-5 Select2 theme so it
+      // matches the existing form-control look.
+      if ($.fn.select2) {
+        $('.js-select2').each(function () {
+          $(this).select2({
+            theme: 'bootstrap-5',
+            width: '100%',
+            placeholder: $(this).data('placeholder') || 'Cari...',
+            dropdownParent: $(this).closest('.form-element, .table-card, form')
+          });
+        });
+      }
     });
   </script>
   @yield('scripts')

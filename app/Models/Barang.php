@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\GeneratesId;
 use App\Traits\LogsActivity;
 use App\Traits\SoftDeletesAudited;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -16,10 +17,14 @@ use Illuminate\Database\Eloquent\Model;
  * historical transactions that reference a product can always still
  * resolve its last known name/price — see the `barang()` relation on
  * DetailInvoicePenjualan, which reads through trashed rows too.
+ *
+ * The primary key is auto-generated (BRG001, BRG002, ...) via
+ * App\Traits\GeneratesId — never entered manually. Use
+ * Barang::createWithAutoId($data) instead of Barang::create().
  */
 class Barang extends Model
 {
-    use HasFactory, LogsActivity, SoftDeletesAudited;
+    use GeneratesId, HasFactory, LogsActivity, SoftDeletesAudited;
 
     protected $table = 'barang';
 
@@ -35,11 +40,17 @@ class Barang extends Model
         'id_barang',
         'nama_barang',
         'harga_barang',
+        'satuan',
     ];
 
     protected $casts = [
         'harga_barang' => 'decimal:2',
     ];
+
+    public static function idPrefix(): string
+    {
+        return 'BRG';
+    }
 
     /**
      * Sales-invoice line items that reference this product.

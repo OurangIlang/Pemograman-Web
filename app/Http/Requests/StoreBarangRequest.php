@@ -11,21 +11,25 @@ class StoreBarangRequest extends FormRequest
         return true;
     }
 
+    /**
+     * The ID is auto-generated server-side (App\Traits\GeneratesId) and
+     * must never be accepted from client input.
+     */
     public function rules(): array
     {
         return [
-            'id_barang' => ['required', 'string', 'max:10', 'unique:barang,id_barang'],
             'nama_barang' => ['required', 'string', 'max:100'],
             'harga_barang' => ['required', 'numeric', 'min:0'],
+            'satuan' => ['nullable', 'string', 'max:20'],
         ];
     }
 
     public function attributes(): array
     {
         return [
-            'id_barang' => 'ID Barang',
             'nama_barang' => 'Nama Barang',
             'harga_barang' => 'Harga Barang',
+            'satuan' => 'Satuan',
         ];
     }
 }

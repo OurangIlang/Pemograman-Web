@@ -16,6 +16,7 @@ class UpdateBarangRequest extends FormRequest
         return [
             'nama_barang' => ['required', 'string', 'max:100'],
             'harga_barang' => ['required', 'numeric', 'min:0'],
+            'satuan' => ['nullable', 'string', 'max:20'],
         ];
     }
 
@@ -24,6 +25,7 @@ class UpdateBarangRequest extends FormRequest
         return [
             'nama_barang' => 'Nama Barang',
             'harga_barang' => 'Harga Barang',
+            'satuan' => 'Satuan',
         ];
     }
 }

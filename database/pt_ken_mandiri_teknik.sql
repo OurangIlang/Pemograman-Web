@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 04, 2026 at 02:56 PM
+-- Generation Time: Jul 05, 2026 at 03:01 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -52,7 +52,27 @@ INSERT INTO `activity_logs` (`id`, `user_id`, `nama_user`, `role`, `aktivitas`, 
 (2, 1, 'Administrator', 'admin', 'Ubah BahanBaku', 'bahan_baku', 'BB01', '{\"harga_bahan_baku\":\"1111.00\"}', '{\"harga_bahan_baku\":\"992929\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0', '2026-07-04 12:47:59', NULL),
 (3, 1, 'Administrator', 'admin', 'Tambah InvoicePenjualan', 'invoice_penjualan', 'NOIN123', NULL, '{\"no_invoice\":\"NOIN123\",\"tanggal\":\"2026-07-03T17:00:00.000000Z\",\"no_faktur\":\"FK-0011234777\",\"no_preorder\":\"PO-00109\",\"id_customer\":\"CUST01\",\"id_pegawai\":\"PEG01\",\"created_by\":1,\"updated_by\":1,\"updated_at\":\"2026-07-04T12:49:23.000000Z\",\"created_at\":\"2026-07-04T12:49:23.000000Z\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0', '2026-07-04 12:49:23', NULL),
 (4, 1, 'Administrator', 'admin', 'Ubah Barang', 'barang', 'ba123', '{\"harga_barang\":\"9999.00\"}', '{\"harga_barang\":\"8888\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0', '2026-07-04 12:49:59', NULL),
-(5, 1, 'Administrator', 'admin', 'Cetak', 'invoice_penjualan', 'NOIN123', NULL, NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0', '2026-07-04 12:50:17', NULL);
+(5, 1, 'Administrator', 'admin', 'Cetak', 'invoice_penjualan', 'NOIN123', NULL, NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0', '2026-07-04 12:50:17', NULL),
+(6, 2, 'Nama Pegawai', 'pegawai', 'Tambah NotaPembelian', 'nota_pembelian', 'kode322', NULL, '{\"kode_nota\":\"kode322\",\"tanggal\":\"2026-07-03T17:00:00.000000Z\",\"id_perusahaan\":\"PER01\",\"id_pegawai\":\"PEG01\",\"informasi\":\"k\",\"created_by\":2,\"updated_by\":2,\"updated_at\":\"2026-07-04T15:05:14.000000Z\",\"created_at\":\"2026-07-04T15:05:14.000000Z\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0', '2026-07-04 15:05:14', NULL),
+(7, 1, 'Administrator', 'admin', 'Ubah BahanBaku', 'bahan_baku', 'bb123', '{\"harga_bahan_baku\":\"121212.00\"}', '{\"harga_bahan_baku\":\"33333\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0', '2026-07-04 15:06:27', NULL),
+(8, 1, 'Administrator', 'admin', 'Hapus (Soft Delete) NotaPembelian', 'nota_pembelian', 'kode322', '{\"kode_nota\":\"kode322\",\"id_perusahaan\":\"PER01\",\"id_pegawai\":\"PEG01\",\"tanggal\":\"2026-07-03T17:00:00.000000Z\",\"informasi\":\"k\",\"created_by\":2,\"updated_by\":2,\"deleted_at\":\"2026-07-04T15:08:07.000000Z\",\"deleted_by\":1,\"created_at\":\"2026-07-04T15:05:14.000000Z\",\"updated_at\":\"2026-07-04T15:08:07.000000Z\"}', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0', '2026-07-04 15:08:07', NULL),
+(9, 1, 'Administrator', 'admin', 'Hapus (Soft Delete) NotaPembelian', 'nota_pembelian', 'kd1234', '{\"kode_nota\":\"kd1234\",\"id_perusahaan\":\"PER01\",\"id_pegawai\":\"PEG01\",\"tanggal\":\"2026-06-18T17:00:00.000000Z\",\"informasi\":\"pembelian\\r\\n\\r\\n\",\"created_by\":null,\"updated_by\":null,\"deleted_at\":\"2026-07-04T15:08:10.000000Z\",\"deleted_by\":1,\"created_at\":null,\"updated_at\":\"2026-07-04T15:08:10.000000Z\"}', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0', '2026-07-04 15:08:10', NULL),
+(10, 1, 'Administrator', 'admin', 'Hapus (Soft Delete) NotaPembelian', 'nota_pembelian', 'KODE12', '{\"kode_nota\":\"KODE12\",\"id_perusahaan\":\"PER01\",\"id_pegawai\":\"PEG01\",\"tanggal\":\"2026-07-03T17:00:00.000000Z\",\"informasi\":\"BELI\",\"created_by\":1,\"updated_by\":1,\"deleted_at\":\"2026-07-04T15:08:14.000000Z\",\"deleted_by\":1,\"created_at\":\"2026-07-04T12:47:11.000000Z\",\"updated_at\":\"2026-07-04T15:08:14.000000Z\"}', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0', '2026-07-04 15:08:14', NULL),
+(11, 1, 'Administrator', 'admin', 'Hapus (Soft Delete) NotaPembelian', 'nota_pembelian', 'kd12345', '{\"kode_nota\":\"kd12345\",\"id_perusahaan\":\"PER01\",\"id_pegawai\":\"PEG01\",\"tanggal\":\"2026-07-03T17:00:00.000000Z\",\"informasi\":\"PEMBELIAN\",\"created_by\":null,\"updated_by\":null,\"deleted_at\":\"2026-07-04T15:08:17.000000Z\",\"deleted_by\":1,\"created_at\":null,\"updated_at\":\"2026-07-04T15:08:17.000000Z\"}', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0', '2026-07-04 15:08:17', NULL),
+(12, 1, 'Administrator', 'admin', 'Hapus (Soft Delete) NotaPembelian', 'nota_pembelian', 'kd1234ftft', '{\"kode_nota\":\"kd1234ftft\",\"id_perusahaan\":\"PER01\",\"id_pegawai\":\"PEG01\",\"tanggal\":\"2026-06-25T17:00:00.000000Z\",\"informasi\":\"asdf\",\"created_by\":null,\"updated_by\":null,\"deleted_at\":\"2026-07-04T15:08:42.000000Z\",\"deleted_by\":1,\"created_at\":null,\"updated_at\":\"2026-07-04T15:08:42.000000Z\"}', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0', '2026-07-04 15:08:42', NULL),
+(13, 1, 'Administrator', 'admin', 'Tambah NotaPembelian', 'nota_pembelian', 'KODE123', NULL, '{\"kode_nota\":\"KODE123\",\"tanggal\":\"2026-07-03T17:00:00.000000Z\",\"id_perusahaan\":\"PER01\",\"id_pegawai\":\"PEG01\",\"informasi\":\"kakak\",\"created_by\":1,\"updated_by\":1,\"updated_at\":\"2026-07-04T15:09:39.000000Z\",\"created_at\":\"2026-07-04T15:09:39.000000Z\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0', '2026-07-04 15:09:39', NULL),
+(14, 1, 'Administrator', 'admin', 'Tambah NotaPembelian', 'nota_pembelian', 'NP-20260705-001', NULL, '{\"tanggal\":\"2026-07-04T17:00:00.000000Z\",\"id_perusahaan\":\"PER01\",\"id_pegawai\":\"PEG01\",\"informasi\":\"hahaha\",\"created_by\":1,\"kode_nota\":\"NP-20260705-001\",\"updated_by\":1,\"updated_at\":\"2026-07-05T00:56:37.000000Z\",\"created_at\":\"2026-07-05T00:56:37.000000Z\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0', '2026-07-05 00:56:37', NULL),
+(15, 1, 'Administrator', 'admin', 'Tambah NotaPembelian', 'nota_pembelian', 'NP-20260705-002', NULL, '{\"tanggal\":\"2026-07-04T17:00:00.000000Z\",\"id_perusahaan\":\"PER01\",\"id_pegawai\":\"PEG01\",\"informasi\":\"hahaha\",\"created_by\":1,\"kode_nota\":\"NP-20260705-002\",\"updated_by\":1,\"updated_at\":\"2026-07-05T00:56:38.000000Z\",\"created_at\":\"2026-07-05T00:56:38.000000Z\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0', '2026-07-05 00:56:38', NULL),
+(16, 1, 'Administrator', 'admin', 'Tambah NotaPembelian', 'nota_pembelian', 'NP-20260705-003', NULL, '{\"tanggal\":\"2026-07-04T17:00:00.000000Z\",\"id_perusahaan\":\"PER01\",\"id_pegawai\":\"PEG01\",\"informasi\":\"hahaha\",\"created_by\":1,\"kode_nota\":\"NP-20260705-003\",\"updated_by\":1,\"updated_at\":\"2026-07-05T00:56:39.000000Z\",\"created_at\":\"2026-07-05T00:56:39.000000Z\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0', '2026-07-05 00:56:39', NULL),
+(17, 1, 'Administrator', 'admin', 'Tambah NotaPembelian', 'nota_pembelian', 'NP-20260705-004', NULL, '{\"tanggal\":\"2026-07-04T17:00:00.000000Z\",\"id_perusahaan\":\"PER01\",\"id_pegawai\":\"PEG01\",\"informasi\":\"hahaha\",\"created_by\":1,\"kode_nota\":\"NP-20260705-004\",\"updated_by\":1,\"updated_at\":\"2026-07-05T00:56:39.000000Z\",\"created_at\":\"2026-07-05T00:56:39.000000Z\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0', '2026-07-05 00:56:39', NULL),
+(18, 1, 'Administrator', 'admin', 'Tambah NotaPembelian', 'nota_pembelian', 'NP-20260705-005', NULL, '{\"tanggal\":\"2026-07-04T17:00:00.000000Z\",\"id_perusahaan\":\"PER01\",\"id_pegawai\":\"PEG01\",\"informasi\":\"hahaha\",\"created_by\":1,\"kode_nota\":\"NP-20260705-005\",\"updated_by\":1,\"updated_at\":\"2026-07-05T00:56:40.000000Z\",\"created_at\":\"2026-07-05T00:56:40.000000Z\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0', '2026-07-05 00:56:40', NULL),
+(19, 1, 'Administrator', 'admin', 'Tambah NotaPembelian', 'nota_pembelian', 'NP-20260705-006', NULL, '{\"tanggal\":\"2026-07-04T17:00:00.000000Z\",\"id_perusahaan\":\"PER01\",\"id_pegawai\":\"PEG01\",\"informasi\":\"hahaha\",\"created_by\":1,\"kode_nota\":\"NP-20260705-006\",\"updated_by\":1,\"updated_at\":\"2026-07-05T00:56:40.000000Z\",\"created_at\":\"2026-07-05T00:56:40.000000Z\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0', '2026-07-05 00:56:40', NULL),
+(20, 1, 'Administrator', 'admin', 'Hapus (Soft Delete) NotaPembelian', 'nota_pembelian', 'NP-20260705-001', '{\"kode_nota\":\"NP-20260705-001\",\"id_perusahaan\":\"PER01\",\"id_pegawai\":\"PEG01\",\"tanggal\":\"2026-07-04T17:00:00.000000Z\",\"informasi\":\"hahaha\",\"created_by\":1,\"updated_by\":1,\"deleted_at\":\"2026-07-05T00:56:58.000000Z\",\"deleted_by\":1,\"created_at\":\"2026-07-05T00:56:37.000000Z\",\"updated_at\":\"2026-07-05T00:56:58.000000Z\"}', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0', '2026-07-05 00:56:58', NULL),
+(21, 1, 'Administrator', 'admin', 'Hapus (Soft Delete) NotaPembelian', 'nota_pembelian', 'NP-20260705-002', '{\"kode_nota\":\"NP-20260705-002\",\"id_perusahaan\":\"PER01\",\"id_pegawai\":\"PEG01\",\"tanggal\":\"2026-07-04T17:00:00.000000Z\",\"informasi\":\"hahaha\",\"created_by\":1,\"updated_by\":1,\"deleted_at\":\"2026-07-05T00:57:03.000000Z\",\"deleted_by\":1,\"created_at\":\"2026-07-05T00:56:38.000000Z\",\"updated_at\":\"2026-07-05T00:57:03.000000Z\"}', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0', '2026-07-05 00:57:03', NULL),
+(22, 1, 'Administrator', 'admin', 'Tambah NotaPembelian', 'nota_pembelian', 'NP-20260705-007', NULL, '{\"tanggal\":\"2026-07-04T17:00:00.000000Z\",\"id_perusahaan\":\"PER01\",\"id_pegawai\":\"PEG01\",\"informasi\":\"kakakak\",\"created_by\":1,\"kode_nota\":\"NP-20260705-007\",\"updated_by\":1,\"updated_at\":\"2026-07-05T00:57:31.000000Z\",\"created_at\":\"2026-07-05T00:57:31.000000Z\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0', '2026-07-05 00:57:31', NULL),
+(23, 1, 'Administrator', 'admin', 'Hapus (Soft Delete) NotaPembelian', 'nota_pembelian', 'NP-20260705-003', '{\"kode_nota\":\"NP-20260705-003\",\"id_perusahaan\":\"PER01\",\"id_pegawai\":\"PEG01\",\"tanggal\":\"2026-07-04T17:00:00.000000Z\",\"informasi\":\"hahaha\",\"created_by\":1,\"updated_by\":1,\"deleted_at\":\"2026-07-05T00:57:41.000000Z\",\"deleted_by\":1,\"created_at\":\"2026-07-05T00:56:39.000000Z\",\"updated_at\":\"2026-07-05T00:57:41.000000Z\"}', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0', '2026-07-05 00:57:41', NULL),
+(24, 1, 'Administrator', 'admin', 'Hapus (Soft Delete) NotaPembelian', 'nota_pembelian', 'NP-20260705-004', '{\"kode_nota\":\"NP-20260705-004\",\"id_perusahaan\":\"PER01\",\"id_pegawai\":\"PEG01\",\"tanggal\":\"2026-07-04T17:00:00.000000Z\",\"informasi\":\"hahaha\",\"created_by\":1,\"updated_by\":1,\"deleted_at\":\"2026-07-05T00:57:46.000000Z\",\"deleted_by\":1,\"created_at\":\"2026-07-05T00:56:39.000000Z\",\"updated_at\":\"2026-07-05T00:57:46.000000Z\"}', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0', '2026-07-05 00:57:46', NULL),
+(25, 1, 'Administrator', 'admin', 'Hapus (Soft Delete) NotaPembelian', 'nota_pembelian', 'NP-20260705-005', '{\"kode_nota\":\"NP-20260705-005\",\"id_perusahaan\":\"PER01\",\"id_pegawai\":\"PEG01\",\"tanggal\":\"2026-07-04T17:00:00.000000Z\",\"informasi\":\"hahaha\",\"created_by\":1,\"updated_by\":1,\"deleted_at\":\"2026-07-05T00:57:50.000000Z\",\"deleted_by\":1,\"created_at\":\"2026-07-05T00:56:40.000000Z\",\"updated_at\":\"2026-07-05T00:57:50.000000Z\"}', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0', '2026-07-05 00:57:50', NULL);
 
 -- --------------------------------------------------------
 
@@ -74,7 +94,7 @@ CREATE TABLE `bahan_baku` (
 
 INSERT INTO `bahan_baku` (`id_bahan_baku`, `nama_bahan_baku`, `harga_bahan_baku`, `deleted_at`, `deleted_by`) VALUES
 ('BB01', 'Besi', 992929.00, NULL, NULL),
-('bb123', 'Solar', 121212.00, NULL, NULL);
+('bb123', 'Solar', 33333.00, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -199,7 +219,16 @@ INSERT INTO `detail_pembelian` (`kode_nota`, `id_bahan_baku`, `qty`, `harga_satu
 ('kd12345', 'bb123', 1, 9999.00, 9999.00, 9999.00, 'solar'),
 ('kd1234', 'bb123', 1, 9999.00, 9999.00, 9999.00, 'solar'),
 ('kd12345', 'bb123', 1, 121212.00, 121212.00, 121212.00, 'solar'),
-('KODE12', 'BB01', 1, 1111.00, 1111.00, 1111.00, 'Besi Plat 2mm – lembar');
+('KODE12', 'BB01', 1, 1111.00, 1111.00, 1111.00, 'Besi Plat 2mm – lembar'),
+('kode322', 'bb123', 1, 121212.00, 121212.00, 121212.00, 'solar'),
+('KODE1', 'bb123', 1, 33333.00, 33333.00, 33333.00, 'solar'),
+('NP-20260705-001', 'BB01', 2, 992929.00, 1985858.00, 1985858.00, 'besi'),
+('NP-20260705-002', 'BB01', 2, 992929.00, 1985858.00, 1985858.00, 'besi'),
+('NP-20260705-003', 'BB01', 2, 992929.00, 1985858.00, 1985858.00, 'besi'),
+('NP-20260705-004', 'BB01', 2, 992929.00, 1985858.00, 1985858.00, 'besi'),
+('NP-20260705-005', 'BB01', 2, 992929.00, 1985858.00, 1985858.00, 'besi'),
+('NP-20260705-006', 'BB01', 2, 992929.00, 1985858.00, 1985858.00, 'besi'),
+('NP-20260705-007', 'bb123', 2, 33333.00, 66666.00, 66666.00, 'solar');
 
 -- --------------------------------------------------------
 
@@ -306,7 +335,10 @@ CREATE TABLE `login_logs` (
 --
 
 INSERT INTO `login_logs` (`id`, `user_id`, `nama_user`, `role`, `login_at`, `logout_at`, `ip_address`, `user_agent`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Administrator', 'admin', '2026-07-04 12:38:43', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0', '2026-07-04 12:38:43', NULL);
+(1, 1, 'Administrator', 'admin', '2026-07-04 12:38:43', '2026-07-04 15:04:40', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0', '2026-07-04 12:38:43', NULL),
+(2, 2, 'Nama Pegawai', 'pegawai', '2026-07-04 15:04:53', '2026-07-04 15:05:46', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0', '2026-07-04 15:04:53', NULL),
+(3, 1, 'Administrator', 'admin', '2026-07-04 15:05:53', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0', '2026-07-04 15:05:53', NULL),
+(4, 1, 'Administrator', 'admin', '2026-07-05 00:54:23', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0', '2026-07-05 00:54:23', NULL);
 
 -- --------------------------------------------------------
 
@@ -354,11 +386,20 @@ CREATE TABLE `nota_pembelian` (
 --
 
 INSERT INTO `nota_pembelian` (`kode_nota`, `id_perusahaan`, `id_pegawai`, `tanggal`, `informasi`, `created_by`, `updated_by`, `deleted_at`, `deleted_by`, `created_at`, `updated_at`) VALUES
-('kd1234', 'PER01', 'PEG01', '2026-06-19', 'pembelian\r\n\r\n', NULL, NULL, NULL, NULL, NULL, NULL),
-('kd12345', 'PER01', 'PEG01', '2026-07-04', 'PEMBELIAN', NULL, NULL, NULL, NULL, NULL, NULL),
-('kd1234ftft', 'PER01', 'PEG01', '2026-06-26', 'asdf', NULL, NULL, NULL, NULL, NULL, NULL),
+('kd1234', 'PER01', 'PEG01', '2026-06-19', 'pembelian\r\n\r\n', NULL, NULL, '2026-07-04 15:08:10', 1, NULL, '2026-07-04 15:08:10'),
+('kd12345', 'PER01', 'PEG01', '2026-07-04', 'PEMBELIAN', NULL, NULL, '2026-07-04 15:08:17', 1, NULL, '2026-07-04 15:08:17'),
+('kd1234ftft', 'PER01', 'PEG01', '2026-06-26', 'asdf', NULL, NULL, '2026-07-04 15:08:42', 1, NULL, '2026-07-04 15:08:42'),
 ('KODE1', 'PER01', 'PEG01', '2026-07-04', 'BELI', 1, 1, NULL, NULL, '2026-07-04 12:46:22', '2026-07-04 12:46:22'),
-('KODE12', 'PER01', 'PEG01', '2026-07-04', 'BELI', 1, 1, NULL, NULL, '2026-07-04 12:47:11', '2026-07-04 12:47:11');
+('KODE12', 'PER01', 'PEG01', '2026-07-04', 'BELI', 1, 1, '2026-07-04 15:08:14', 1, '2026-07-04 12:47:11', '2026-07-04 15:08:14'),
+('KODE123', 'PER01', 'PEG01', '2026-07-04', 'kakak', 1, 1, NULL, NULL, '2026-07-04 15:09:39', '2026-07-04 15:09:39'),
+('kode322', 'PER01', 'PEG01', '2026-07-04', 'k', 2, 2, '2026-07-04 15:08:07', 1, '2026-07-04 15:05:14', '2026-07-04 15:08:07'),
+('NP-20260705-001', 'PER01', 'PEG01', '2026-07-05', 'hahaha', 1, 1, '2026-07-05 00:56:58', 1, '2026-07-05 00:56:37', '2026-07-05 00:56:58'),
+('NP-20260705-002', 'PER01', 'PEG01', '2026-07-05', 'hahaha', 1, 1, '2026-07-05 00:57:03', 1, '2026-07-05 00:56:38', '2026-07-05 00:57:03'),
+('NP-20260705-003', 'PER01', 'PEG01', '2026-07-05', 'hahaha', 1, 1, '2026-07-05 00:57:41', 1, '2026-07-05 00:56:39', '2026-07-05 00:57:41'),
+('NP-20260705-004', 'PER01', 'PEG01', '2026-07-05', 'hahaha', 1, 1, '2026-07-05 00:57:46', 1, '2026-07-05 00:56:39', '2026-07-05 00:57:46'),
+('NP-20260705-005', 'PER01', 'PEG01', '2026-07-05', 'hahaha', 1, 1, '2026-07-05 00:57:50', 1, '2026-07-05 00:56:40', '2026-07-05 00:57:50'),
+('NP-20260705-006', 'PER01', 'PEG01', '2026-07-05', 'hahaha', 1, 1, NULL, NULL, '2026-07-05 00:56:40', '2026-07-05 00:56:40'),
+('NP-20260705-007', 'PER01', 'PEG01', '2026-07-05', 'kakakak', 1, 1, NULL, NULL, '2026-07-05 00:57:31', '2026-07-05 00:57:31');
 
 -- --------------------------------------------------------
 
@@ -441,9 +482,9 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('DkIcIg9DzRErFicjtWauWrva0oSUEHMZnsS4gY9o', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiQXhWMm1OMTBNajg5Y0xNWDBqZlJ1QVlHOGxlZDBhZkhMc3IxT00xMiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7czo1OiJyb3V0ZSI7czo1OiJsb2dpbiI7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==', 1783164080),
-('GIrnKJymx8IVcFVYuqc3zo78F3bI7qz9mAgjkAwn', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoidFhiRXhYY2FGT1lTcW9ZTWUxRGN4SmRoNWFGRVZSa1pKUXl2MWhXRCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7czo1OiJyb3V0ZSI7czo1OiJsb2dpbiI7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==', 1783163935),
-('t0SKHJJRvEmNin66jJYjF13LYNTN4uMKoCouCVpK', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiS0kwa2NzTk1yOVduVXQwSG91cVBXV1ViUU5CdVB3MXFuejdaM1JBOCI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9kYXNoYm9hcmQiO3M6NToicm91dGUiO3M6OToiZGFzaGJvYXJkIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjEyOiJsb2dpbl9sb2dfaWQiO2k6MTt9', 1783169568);
+('IUFOGZFiKPhlRGqe3CAkThCku1Z4KCNhhOuOuXRg', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiSmFMWEVsRWF4d3dSU0RZc0oyU0NZcmc4R09Jb25BRVFRcllxM0pqeSI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1783201957),
+('MjuujLHY1wnCz2ftAQcA2MX19HhTTnaoFHLWCQX0', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiMkZiYUcwRWpwY1haMXNMdkp1MzdrbkhlbzNHbkI0dklTeTZ0UER1SiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjY6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9ub3RhIjtzOjU6InJvdXRlIjtzOjEwOiJub3RhLmluZGV4Ijt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjEyOiJsb2dpbl9sb2dfaWQiO2k6Mzt9', 1783178024),
+('TBel8IMQNjvKYmMcofvYB7D9BlMPSkdnlZQ7FWmK', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 Edg/150.0.0.0', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiQTM3MWxrVEZ1ZWtNWTRVYjhoNUsxWmQ5b1lwRDF0a0JGbmZmclVyVCI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6Mzk6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9wZXJ1c2FoYWFuL2NyZWF0ZSI7czo1OiJyb3V0ZSI7czoxNzoicGVydXNhaGFhbi5jcmVhdGUiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MTI6ImxvZ2luX2xvZ19pZCI7aTo0O30=', 1783213183);
 
 -- --------------------------------------------------------
 
@@ -615,7 +656,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `activity_logs`
 --
 ALTER TABLE `activity_logs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -633,7 +674,7 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT for table `login_logs`
 --
 ALTER TABLE `login_logs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `migrations`

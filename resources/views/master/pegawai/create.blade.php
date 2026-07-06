@@ -17,8 +17,8 @@
       @csrf
       <div class="form-element">
         <label>ID Pegawai</label>
-        <input type="text" name="id_pegawai" class="form-control @error('id_pegawai') is-invalid @enderror" value="{{ old('id_pegawai') }}" required>
-        @error('id_pegawai') <span class="invalid-feedback">{{ $message }}</span> @enderror
+        <input type="text" class="form-control" value="{{ $nextId }}" readonly>
+        <small class="text-muted">ID dibuat otomatis oleh sistem.</small>
       </div>
       <div class="form-element">
         <label>Nama Pegawai</label>

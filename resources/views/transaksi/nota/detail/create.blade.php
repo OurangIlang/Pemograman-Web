@@ -24,15 +24,20 @@
 
       <div class="form-element">
         <label>Bahan Baku</label>
-        <select name="id_bahan_baku" id="id_bahan_baku" class="form-control @error('id_bahan_baku') is-invalid @enderror" onchange="ambilHarga()" required>
+        <select name="id_bahan_baku" id="id_bahan_baku" class="form-control js-select2 @error('id_bahan_baku') is-invalid @enderror" data-placeholder="Cari bahan baku..." onchange="ambilHarga()" required>
           <option value="">-- Pilih Bahan Baku --</option>
           @foreach ($bahanBaku as $b)
-            <option value="{{ $b->id_bahan_baku }}" data-harga="{{ $b->harga_bahan_baku }}" @selected(old('id_bahan_baku') === $b->id_bahan_baku)>
+            <option value="{{ $b->id_bahan_baku }}" data-harga="{{ $b->harga_bahan_baku }}" data-satuan="{{ $b->satuan }}" @selected(old('id_bahan_baku') === $b->id_bahan_baku)>
               {{ $b->nama_bahan_baku }}
             </option>
           @endforeach
         </select>
-        @error('id_bahan_baku') <span class="invalid-feedback">{{ $message }}</span> @enderror
+        @error('id_bahan_baku') <span class="invalid-feedback d-block">{{ $message }}</span> @enderror
+      </div>
+
+      <div class="form-element">
+        <label>Satuan</label>
+        <input type="text" id="satuan_display" class="form-control" readonly>
       </div>
 
       <div class="form-element">
@@ -74,10 +79,15 @@
 <script>
 function ambilHarga() {
     var sel   = document.getElementById('id_bahan_baku');
-    var harga = sel.options[sel.selectedIndex].getAttribute('data-harga') || 0;
+    var opt   = sel.options[sel.selectedIndex];
+    var harga = opt.getAttribute('data-harga') || 0;
     document.getElementById('harga_satuan').value = parseFloat(harga).toFixed(2);
+    document.getElementById('satuan_display').value = opt.getAttribute('data-satuan') || '';
     hitung();
 }
+$(document).ready(function () {
+    $('#id_bahan_baku').on('change', ambilHarga);
+});
 function hitung() {
     var q   = parseFloat(document.getElementById('qty').value) || 0;
     var p   = parseFloat(document.getElementById('harga_satuan').value) || 0;

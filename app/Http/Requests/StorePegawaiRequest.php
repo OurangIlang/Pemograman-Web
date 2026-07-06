@@ -11,10 +11,13 @@ class StorePegawaiRequest extends FormRequest
         return true;
     }
 
+    /**
+     * The ID is auto-generated server-side (App\Traits\GeneratesId) and
+     * must never be accepted from client input.
+     */
     public function rules(): array
     {
         return [
-            'id_pegawai' => ['required', 'string', 'max:10', 'unique:pegawai,id_pegawai'],
             'nama_pegawai' => ['required', 'string', 'max:100'],
         ];
     }
@@ -22,7 +25,6 @@ class StorePegawaiRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'id_pegawai' => 'ID Pegawai',
             'nama_pegawai' => 'Nama Pegawai',
         ];
     }

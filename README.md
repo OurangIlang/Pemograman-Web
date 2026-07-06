@@ -1,11 +1,5 @@
 # PT Ken Mandiri Teknik — Sistem Inventory & Penjualan (Laravel 12)
 
-
-- @GerhaanSyachh - Gerhaan
-- @irpanstmi - Irfan Sentosa 1324090
-- @tristananth - Tristan Anthony 
-- @OurangIlang - Rasya Khairi Najib 1324091
-
 Aplikasi manajemen pembelian (nota pembelian) dan penjualan (invoice) untuk
 PT Ken Mandiri Teknik. Ini adalah hasil migrasi **1:1** dari aplikasi PHP-native
 asli ke **Laravel 12** (PHP 8.3+, MySQL/MariaDB) dengan pola MVC, Eloquent ORM,
@@ -14,11 +8,12 @@ Controller, foreign-key constraints, proteksi CSRF, dan autentikasi.
 
 Tampilan (UI/UX), alur kerja, nama tabel/kolom, dan relasi dipertahankan persis
 seperti aplikasi asli.
+
 ---
 
 ## Persyaratan
 
-- PHP >= 8.2
+- PHP >= 8.3
 - Composer 2
 - MySQL >= 8 atau MariaDB >= 10.4
 - Ekstensi PHP standar Laravel (OpenSSL, PDO, Mbstring, Tokenizer, XML, Ctype, JSON, BCMath, Fileinfo)

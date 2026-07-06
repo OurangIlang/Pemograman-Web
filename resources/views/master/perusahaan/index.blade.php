@@ -22,6 +22,7 @@
           <th>No. Telpon</th>
           <th>Email</th>
           <th>Penandatangan</th>
+          <th>Status</th>
           <th>Aksi</th>
         </tr>
       </thead>
@@ -34,6 +35,13 @@
             <td>{{ $d->no_telpon }}</td>
             <td>{{ $d->email_perusahaan }}</td>
             <td>{{ $d->nama_penandatangan }}</td>
+            <td>
+              @if ($d->status_aktif)
+                <span class="badge bg-success">Aktif</span>
+              @else
+                <span class="badge bg-secondary">Nonaktif</span>
+              @endif
+            </td>
             <td>
               <a class="btn-ubah" href="{{ route('perusahaan.edit', $d->id_perusahaan) }}"><i class="fa-solid fa-pen-to-square"></i> Ubah</a>
               <form action="{{ route('perusahaan.destroy', $d->id_perusahaan) }}" method="POST" class="btn-hapus-inline" onsubmit="return confirm('Yakin hapus?')">

@@ -24,15 +24,20 @@
 
       <div class="form-element">
         <label>Barang</label>
-        <select name="id_barang" id="id_barang" class="form-control @error('id_barang') is-invalid @enderror" onchange="ambilHarga()" required>
+        <select name="id_barang" id="id_barang" class="form-control js-select2 @error('id_barang') is-invalid @enderror" data-placeholder="Cari barang..." onchange="ambilHarga()" required>
           <option value="">-- Pilih Barang --</option>
           @foreach ($barang as $b)
-            <option value="{{ $b->id_barang }}" data-harga="{{ $b->harga_barang }}" @selected(old('id_barang') === $b->id_barang)>
+            <option value="{{ $b->id_barang }}" data-harga="{{ $b->harga_barang }}" data-satuan="{{ $b->satuan }}" @selected(old('id_barang') === $b->id_barang)>
               {{ $b->nama_barang }}
             </option>
           @endforeach
         </select>
-        @error('id_barang') <span class="invalid-feedback">{{ $message }}</span> @enderror
+        @error('id_barang') <span class="invalid-feedback d-block">{{ $message }}</span> @enderror
+      </div>
+
+      <div class="form-element">
+        <label>Satuan</label>
+        <input type="text" id="satuan_display" class="form-control" readonly>
       </div>
 
       <div class="form-element">
@@ -74,10 +79,15 @@
 <script>
 function ambilHarga() {
     var sel   = document.getElementById('id_barang');
-    var harga = sel.options[sel.selectedIndex].getAttribute('data-harga') || 0;
+    var opt   = sel.options[sel.selectedIndex];
+    var harga = opt.getAttribute('data-harga') || 0;
     document.getElementById('unit_price').value = parseFloat(harga).toFixed(2);
+    document.getElementById('satuan_display').value = opt.getAttribute('data-satuan') || '';
     hitung();
 }
+$(document).ready(function () {
+    $('#id_barang').on('change', ambilHarga);
+});
 function hitung() {
     var q   = parseFloat(document.getElementById('qty').value) || 0;
     var p   = parseFloat(document.getElementById('unit_price').value) || 0;

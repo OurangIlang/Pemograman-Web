@@ -37,7 +37,7 @@
       </div>
       <div class="form-element">
         <label>Customer</label>
-        <select name="id_customer" class="form-control @error('id_customer') is-invalid @enderror" required>
+        <select name="id_customer" class="form-control js-select2 @error('id_customer') is-invalid @enderror" data-placeholder="Cari customer..." required>
           @foreach ($customer as $r)
             <option value="{{ $r->id_customer }}" @selected(old('id_customer', $item->id_customer) === $r->id_customer)>{{ $r->nama_customer }}</option>
           @endforeach
@@ -47,7 +47,7 @@
       <div class="form-element">
         <label>Pegawai</label>
         @if (auth()->user()->isAdmin())
-          <select name="id_pegawai" class="form-control @error('id_pegawai') is-invalid @enderror" required>
+          <select name="id_pegawai" class="form-control js-select2 @error('id_pegawai') is-invalid @enderror" data-placeholder="Cari pegawai..." required>
             @foreach ($pegawai as $r)
               <option value="{{ $r->id_pegawai }}" @selected(old('id_pegawai', $item->id_pegawai) === $r->id_pegawai)>{{ $r->nama_pegawai }}</option>
             @endforeach

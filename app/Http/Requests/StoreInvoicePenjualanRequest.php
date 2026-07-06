@@ -25,27 +25,39 @@ class StoreInvoicePenjualanRequest extends FormRequest
         }
     }
 
+    /**
+     * no_invoice, no_faktur and no_preorder are all auto-generated
+     * server-side (INV-/FK-/PO-YYYYMMDD-001, via
+     * App\Traits\GeneratesDatedId) and must never be accepted from
+     * client input.
+     *
+     * `items` carries the line items collected across step 2 of the
+     * multi-step form. Each item only needs a product id and a
+     * quantity — the price is always re-read from the barang master at
+     * save time, never trusted from the request.
+     */
     public function rules(): array
     {
         return [
-            'no_invoice' => ['required', 'string', 'max:20', 'unique:invoice_penjualan,no_invoice'],
             'tanggal' => ['required', 'date'],
-            'no_faktur' => ['nullable', 'string', 'max:20'],
-            'no_preorder' => ['nullable', 'string', 'max:20'],
             'id_customer' => ['required', 'string', 'exists:customer,id_customer'],
             'id_pegawai' => ['required', 'string', 'exists:pegawai,id_pegawai'],
+            'items' => ['required', 'array', 'min:1'],
+            'items.*.id_barang' => ['required', 'string', 'exists:barang,id_barang'],
+            'items.*.qty' => ['required', 'integer', 'min:1'],
+            'items.*.deskripsi' => ['nullable', 'string'],
         ];
     }
 
     public function attributes(): array
     {
         return [
-            'no_invoice' => 'No Invoice',
             'tanggal' => 'Tanggal',
-            'no_faktur' => 'No Faktur',
-            'no_preorder' => 'No Preorder',
             'id_customer' => 'Customer',
             'id_pegawai' => 'Pegawai',
+            'items' => 'Detail Barang',
+            'items.*.id_barang' => 'Barang',
+            'items.*.qty' => 'Qty',
         ];
     }
 }

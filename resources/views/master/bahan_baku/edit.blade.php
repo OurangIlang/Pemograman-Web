@@ -26,6 +26,11 @@
         @error('nama_bahan_baku') <span class="invalid-feedback">{{ $message }}</span> @enderror
       </div>
       <div class="form-element">
+        <label>Satuan</label>
+        <input type="text" name="satuan" value="{{ old('satuan', $item->satuan) }}" class="form-control @error('satuan') is-invalid @enderror" placeholder="Kg, Liter, Pcs, dll">
+        @error('satuan') <span class="invalid-feedback">{{ $message }}</span> @enderror
+      </div>
+      <div class="form-element">
         <label>Harga Bahan Baku</label>
         <input type="number" step="0.01" name="harga_bahan_baku" value="{{ old('harga_bahan_baku', $item->harga_bahan_baku) }}" class="form-control @error('harga_bahan_baku') is-invalid @enderror">
         @error('harga_bahan_baku') <span class="invalid-feedback">{{ $message }}</span> @enderror

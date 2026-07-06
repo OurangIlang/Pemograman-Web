@@ -17,13 +17,18 @@
       @csrf
       <div class="form-element">
         <label>ID Bahan Baku</label>
-        <input type="text" name="id_bahan_baku" class="form-control @error('id_bahan_baku') is-invalid @enderror" value="{{ old('id_bahan_baku') }}" required>
-        @error('id_bahan_baku') <span class="invalid-feedback">{{ $message }}</span> @enderror
+        <input type="text" class="form-control" value="{{ $nextId }}" readonly>
+        <small class="text-muted">ID dibuat otomatis oleh sistem.</small>
       </div>
       <div class="form-element">
         <label>Nama Bahan Baku</label>
         <input type="text" name="nama_bahan_baku" class="form-control @error('nama_bahan_baku') is-invalid @enderror" value="{{ old('nama_bahan_baku') }}" required>
         @error('nama_bahan_baku') <span class="invalid-feedback">{{ $message }}</span> @enderror
+      </div>
+      <div class="form-element">
+        <label>Satuan</label>
+        <input type="text" name="satuan" class="form-control @error('satuan') is-invalid @enderror" value="{{ old('satuan', 'Unit') }}" placeholder="Kg, Liter, Pcs, dll">
+        @error('satuan') <span class="invalid-feedback">{{ $message }}</span> @enderror
       </div>
       <div class="form-element">
         <label>Harga Bahan Baku</label>

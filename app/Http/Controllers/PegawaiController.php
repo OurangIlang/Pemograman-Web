@@ -24,12 +24,14 @@ class PegawaiController extends Controller
 
     public function create(): View
     {
-        return view('master.pegawai.create');
+        $nextId = Pegawai::nextId();
+
+        return view('master.pegawai.create', compact('nextId'));
     }
 
     public function store(StorePegawaiRequest $request): RedirectResponse
     {
-        Pegawai::create($request->validated());
+        Pegawai::createWithAutoId($request->validated());
 
         return redirect()
             ->route('pegawai.index')

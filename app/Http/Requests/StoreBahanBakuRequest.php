@@ -11,21 +11,26 @@ class StoreBahanBakuRequest extends FormRequest
         return true;
     }
 
+    /**
+     * The ID is auto-generated server-side (App\Traits\GeneratesId) and
+     * must never be accepted from client input, so it is intentionally
+     * not part of the validated/fillable data here.
+     */
     public function rules(): array
     {
         return [
-            'id_bahan_baku' => ['required', 'string', 'max:10', 'unique:bahan_baku,id_bahan_baku'],
             'nama_bahan_baku' => ['required', 'string', 'max:100'],
             'harga_bahan_baku' => ['required', 'numeric', 'min:0'],
+            'satuan' => ['nullable', 'string', 'max:20'],
         ];
     }
 
     public function attributes(): array
     {
         return [
-            'id_bahan_baku' => 'ID Bahan Baku',
             'nama_bahan_baku' => 'Nama Bahan Baku',
             'harga_bahan_baku' => 'Harga Bahan Baku',
+            'satuan' => 'Satuan',
         ];
     }
 }

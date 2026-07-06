@@ -17,8 +17,8 @@
       @csrf
       <div class="form-element">
         <label>ID Perusahaan</label>
-        <input type="text" name="id_perusahaan" class="form-control @error('id_perusahaan') is-invalid @enderror" value="{{ old('id_perusahaan') }}" required>
-        @error('id_perusahaan') <span class="invalid-feedback">{{ $message }}</span> @enderror
+        <input type="text" class="form-control" value="{{ $nextId }}" readonly>
+        <small class="text-muted">ID dibuat otomatis oleh sistem.</small>
       </div>
       @include('master.perusahaan._fields', ['item' => null])
       <div class="form-actions">

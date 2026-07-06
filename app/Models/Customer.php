@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\GeneratesId;
 use App\Traits\LogsActivity;
 use App\Traits\SoftDeletesAudited;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,10 +15,14 @@ use Illuminate\Database\Eloquent\Model;
  *
  * Soft-deleted (never actually removed) so historical sales invoices
  * keep referencing a valid customer record even after it's "deleted".
+ *
+ * The primary key is auto-generated (CUST001, CUST002, ...) via
+ * App\Traits\GeneratesId — never entered manually. Use
+ * Customer::createWithAutoId($data) instead of Customer::create().
  */
 class Customer extends Model
 {
-    use HasFactory, LogsActivity, SoftDeletesAudited;
+    use GeneratesId, HasFactory, LogsActivity, SoftDeletesAudited;
 
     protected $table = 'customer';
 
@@ -35,6 +40,11 @@ class Customer extends Model
         'nama_pt',
         'alamat_pt',
     ];
+
+    public static function idPrefix(): string
+    {
+        return 'CUST';
+    }
 
     /**
      * Sales invoices issued to this customer.

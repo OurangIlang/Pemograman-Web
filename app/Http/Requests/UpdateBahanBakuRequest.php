@@ -18,6 +18,7 @@ class UpdateBahanBakuRequest extends FormRequest
         return [
             'nama_bahan_baku' => ['required', 'string', 'max:100'],
             'harga_bahan_baku' => ['required', 'numeric', 'min:0'],
+            'satuan' => ['nullable', 'string', 'max:20'],
         ];
     }
 
@@ -26,6 +27,7 @@ class UpdateBahanBakuRequest extends FormRequest
         return [
             'nama_bahan_baku' => 'Nama Bahan Baku',
             'harga_bahan_baku' => 'Harga Bahan Baku',
+            'satuan' => 'Satuan',
         ];
     }
 }
