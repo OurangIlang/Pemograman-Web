@@ -2,7 +2,7 @@
 
 Aplikasi manajemen pembelian (nota pembelian) dan penjualan (invoice) untuk
 PT Ken Mandiri Teknik. Ini adalah hasil migrasi **1:1** dari aplikasi PHP-native
-asli ke **Laravel 12** (PHP 8.3+, MySQL/MariaDB) dengan pola MVC, Eloquent ORM,
+asli ke **Laravel 12** (PHP 8.5+, MySQL/MariaDB) dengan pola MVC, Eloquent ORM,
 Blade, Middleware, Form Request Validation, Migration, Seeder, Resource
 Controller, foreign-key constraints, proteksi CSRF, dan autentikasi.
 
@@ -11,6 +11,13 @@ seperti aplikasi asli.
 
 ---
 
+## Anggota
+Rasya Khairi Najib -- 1324091
+Gerhan 
+Tristan Anthony
+Irfan Sentosa -- 1324090
+
+---
 ## Persyaratan
 
 - PHP > 8.5
