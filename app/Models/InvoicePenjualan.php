@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Traits\AutoAudit;
-use App\Traits\GeneratesDatedId;
 use App\Traits\LogsActivity;
 use App\Traits\SoftDeletesAudited;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,10 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * Invoice Penjualan (sales invoice) header.
  *
  * Mirrors the original `invoice_penjualan` table. Primary key is the
- * `no_invoice` string, auto-generated in the format INV-YYYYMMDD-001
- * via App\Traits\GeneratesDatedId — never entered manually.
- * `no_faktur` (FK-YYYYMMDD-001) and `no_preorder` (the Purchase Order
- * number, PO-YYYYMMDD-001) are generated the same way at creation time.
+ * human-entered `no_invoice` string.
  *
  * `created_by` / `updated_by` / `deleted_by` + timestamps were added on
  * top of the original schema to support the "Riwayat Transaksi"
@@ -26,7 +22,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class InvoicePenjualan extends Model
 {
-    use AutoAudit, GeneratesDatedId, HasFactory, LogsActivity, SoftDeletesAudited;
+    use HasFactory, LogsActivity, SoftDeletesAudited, AutoAudit;
 
     protected $table = 'invoice_penjualan';
 

@@ -31,17 +31,12 @@ class PerusahaanController extends Controller
 
     public function create(): View
     {
-        $nextId = Perusahaan::nextId();
-
-        return view('master.perusahaan.create', compact('nextId'));
+        return view('master.perusahaan.create');
     }
 
     public function store(StorePerusahaanRequest $request): RedirectResponse
     {
-        $data = $request->validated();
-        $data['status_aktif'] = $request->boolean('status_aktif', true);
-
-        Perusahaan::createWithAutoId($data);
+        Perusahaan::create($request->validated());
 
         return redirect()
             ->route('perusahaan.index')
@@ -58,9 +53,7 @@ class PerusahaanController extends Controller
     public function update(UpdatePerusahaanRequest $request, string $id): RedirectResponse
     {
         $item = Perusahaan::findOrFail($id);
-        $data = $request->validated();
-        $data['status_aktif'] = $request->boolean('status_aktif');
-        $item->update($data);
+        $item->update($request->validated());
 
         return redirect()
             ->route('perusahaan.index')

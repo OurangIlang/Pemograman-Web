@@ -30,9 +30,7 @@ class BahanBakuController extends Controller
      */
     public function create(): View
     {
-        $nextId = BahanBaku::nextId();
-
-        return view('master.bahan_baku.create', compact('nextId'));
+        return view('master.bahan_baku.create');
     }
 
     /**
@@ -40,7 +38,7 @@ class BahanBakuController extends Controller
      */
     public function store(StoreBahanBakuRequest $request): RedirectResponse
     {
-        BahanBaku::createWithAutoId($request->validated());
+        BahanBaku::create($request->validated());
 
         return redirect()
             ->route('bahan_baku.index')

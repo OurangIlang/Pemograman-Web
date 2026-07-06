@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Traits\AutoAudit;
-use App\Traits\GeneratesDatedId;
 use App\Traits\LogsActivity;
 use App\Traits\SoftDeletesAudited;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,10 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * Nota Pembelian (purchase note) header.
  *
  * Mirrors the original `nota_pembelian` table. Primary key is the
- * `kode_nota` string, auto-generated in the format NP-YYYYMMDD-001 via
- * App\Traits\GeneratesDatedId — never entered manually. Use
- * NotaPembelian::createWithDatedId('kode_nota', 'NP', $data) instead of
- * NotaPembelian::create().
+ * human-entered `kode_nota` string.
  *
  * `created_by` / `updated_by` / `deleted_by` + timestamps were added on
  * top of the original schema to support the "Riwayat Transaksi"
@@ -26,7 +22,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class NotaPembelian extends Model
 {
-    use AutoAudit, GeneratesDatedId, HasFactory, LogsActivity, SoftDeletesAudited;
+    use HasFactory, LogsActivity, SoftDeletesAudited, AutoAudit;
 
     protected $table = 'nota_pembelian';
 

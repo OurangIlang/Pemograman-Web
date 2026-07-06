@@ -24,14 +24,12 @@ class BarangController extends Controller
 
     public function create(): View
     {
-        $nextId = Barang::nextId();
-
-        return view('master.barang.create', compact('nextId'));
+        return view('master.barang.create');
     }
 
     public function store(StoreBarangRequest $request): RedirectResponse
     {
-        Barang::createWithAutoId($request->validated());
+        Barang::create($request->validated());
 
         return redirect()
             ->route('barang.index')
