@@ -20,7 +20,7 @@ Irfan Sentosa -- 1324090 <br>
 ---
 ## Persyaratan
 
-- PHP > 8.5
+- PHP >= 8.5
 - Composer 2
 - MySQL >= 8 atau MariaDB >= 10.4
 - Ekstensi PHP standar Laravel (OpenSSL, PDO, Mbstring, Tokenizer, XML, Ctype, JSON, BCMath, Fileinfo)
